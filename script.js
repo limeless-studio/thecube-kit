@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryModalCaption = document.getElementById('galleryModalCaption');
 
     window.openImageModal = function(src, alt) {
-        galleryModalContentArea.innerHTML = `<img src="${src}" alt="${alt}">`;
+        galleryModalContentArea.innerHTML = `<img src="https://limeless-studio.github.io/thecube-kit${src}" alt="${alt}">`;
         galleryModalCaption.textContent = alt;
         galleryModal.classList.add('active');
     }
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openVideoModal = function(youtubeVideoId) {
         // Ensure you use the YouTube embed URL format
         const embedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0`;
-        galleryModalContentArea.innerHTML = `<iframe width="560" height="315" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        galleryModalContentArea.innerHTML = `<iframe width="560" height="315" src="https://limeless-studio.github.io/thecube-kit${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
         galleryModalCaption.textContent = "Game Trailer"; // Or fetch title if needed
         galleryModal.classList.add('active');
     }

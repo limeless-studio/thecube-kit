@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THE CUBE | ESCAPE IF YOU CAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --primary-bg: #000000;
+        --primary-text: #ffffff;
+        --accent-color: #4caf50;
+        --secondary-accent: #00f7ff;
+        --border-color: #333333;
+        --modal-bg: rgba(0, 0, 0, 0.95);
+        --font-main: "Orbitron", sans-serif;
+        --font-heading: "Arial Black", Helvetica, sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-main);
+        background-color: var(--primary-bg);
+        color: var(--primary-text);
+        line-height: 1.6;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+        background-color: var(--primary-bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-accent);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--accent-color);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--font-heading);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 900;
+        text-align: center;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 10px var(--secondary-accent);
+      }
+
+      h2 {
+        font-size: 2.8rem;
+        margin-bottom: 1.2rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        max-width: 65ch;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.1rem;
+      }
+
+      section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero {
+        background: radial-gradient(circle at center, rgba(0, 255, 255, 0.05), var(--primary-bg));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M50,10 L90,50 L50,90 L10,50 Z" stroke="%234CAF50" stroke-width="2" fill="none"/></svg>');
+        background-size: 200px;
+        animation: rotateCube 20s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes rotateCube {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to bottom, transparent, var(--primary-bg));
+        pointer-events: none;
+      }
+
+      .overview {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><rect x="10" y="10" width="80" height="80" stroke="%2300f7ff" stroke-width="2" fill="none"/></svg>');
+        background-size: 150px;
+      }
+
+      .feature {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%2300f7ff" stroke-width="2"/></svg>');
+        background-size: 100px;
+        padding: 4rem 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .roadmap {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><circle cx="50" cy="50" r="40" stroke="%2300f7ff" stroke-width="2" fill="none"/></svg>');
+        background-size: 120px;
+      }
+
+      .gallery {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M10,50 H90 M50,10 V90" stroke="%2300f7ff" stroke-width="2"/></svg>');
+        background-size: 130px;
+      }
+
+      .logo {
+        width: 100%;
+        max-width: 450px;
+        margin-bottom: 3rem;
+        position: relative;
+        filter: drop-shadow(0 0 20px var(--secondary-accent));
+      }
+
+      .logo-img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-img:hover {
+        transform: scale(1.05);
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        padding: 1.2rem 2.5rem;
+        background-color: transparent;
+        color: var(--primary-text);
+        border: 2px solid var(--secondary-accent);
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 2rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, var(--secondary-accent), transparent);
+        transition: left 0.3s ease;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        color: var(--primary-bg);
+        background-color: var(--secondary-accent);
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .cta-button img {
+        vertical-align: middle;
+        margin-right: 0.75rem;
+        width: 24px;
+        height: 24px;
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+        cursor: pointer;
+        color: var(--secondary-accent);
+        font-size: 2rem;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0) translateX(-50%);
+        }
+        40% {
+          transform: translateY(-30px) translateX(-50%);
+        }
+        60% {
+          transform: translateY(-15px) translateX(-50%);
+        }
+      }
+
+      .countdown-timer-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        height: 500px;
+        background-color: var(--primary-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 3rem;
+      }
+
+      .timer-text {
+        position: absolute;
+        font-family: var(--font-main);
+        font-size: 6rem;
+        font-weight: bold;
+        color: var(--primary-text);
+        mix-blend-mode: difference;
+        letter-spacing: 0.15em;
+        text-shadow: 0 0 15px var(--secondary-accent);
+        user-select: none;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+          text-shadow: 0 0 15px var(--secondary-accent);
+        }
+        50% {
+          opacity: 0.85;
+          text-shadow: 0 0 25px var(--secondary-accent);
+        }
+        100% {
+          opacity: 1;
+          text-shadow: 0 0 15px var(--secondary-accent);
+        }
+      }
+
+      .feature-content {
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature-visual {
+        width: 100%;
+        max-width: 900px;
+        height: 50vh;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        justify-self: center;
+      }
+
+      .feature-visual:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .feature-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .feature-icon {
+        font-size: 4rem;
+        color: var(--secondary-accent);
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-icon:hover {
+        transform: scale(1.2);
+      }
+
+      .gallery {
+        padding: 5rem 2rem;
+      }
+
+      .gallery-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        scroll-snap-type: x mandatory;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 2rem;
+      }
+
+      .gallery-carousel::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .gallery-carousel::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-accent);
+      }
+
+      .gallery-item {
+        position: relative;
+        flex: 0 0 400px;
+        height: 250px;
+        scroll-snap-align: start;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover .overlay {
+        opacity: 1;
+      }
+
+      .gallery-item .overlay span {
+        color: var(--secondary-accent);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--modal-bg);
+        z-index: 300;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .fullscreen-modal img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border: 2px solid var(--secondary-accent);
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .fullscreen-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: var(--secondary-accent);
+        font-size: 2rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .fullscreen-close:hover {
+        transform: rotate(90deg);
+      }
+
+      .roadmap {
+        padding: 5rem 2rem;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        height: 100%;
+        background: var(--secondary-accent);
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin: 2rem 0;
+        width: 50%;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        text-align: right;
+        flex-direction: row-reverse;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+        text-align: left;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        top: 1.5rem;
+        width: 20px;
+        height: 20px;
+        background: var(--secondary-accent);
+        border: 2px solid var(--primary-bg);
+      }
+
+      .timeline-item:nth-child(odd)::before {
+        right: -12px;
+      }
+
+      .timeline-item:nth-child(even)::before {
+        left: -12px;
+      }
+
+      .timeline-item.completed h3 {
+        color: var(--accent-color);
+      }
+
+      .timeline-item i {
+        font-size: 2rem;
+        color: var(--secondary-accent);
+      }
+
+      .kanban-board {
+        margin-top: 4rem;
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+      }
+
+      .kanban-column {
+        flex: 1;
+        padding: 1rem;
+        background: rgba(0, 255, 255, 0.05);
+        border: 1px solid var(--secondary-accent);
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .kanban-column h3 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .task-counter {
+        display: inline-block;
+        background: var(--secondary-accent);
+        color: var(--primary-bg);
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        border: 1px solid var(--secondary-accent);
+        box-shadow: 0 0 5px var(--secondary-accent);
+      }
+
+      .kanban-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: var(--primary-bg);
+        border: 1px solid var(--secondary-accent);
+        box-shadow: 0 0 10px var(--secondary-accent);
+        transition: transform 0.3s ease;
+      }
+
+      .kanban-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .kanban-card p {
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      .kanban-card .tags {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--secondary-accent);
+        opacity: 0.8;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-top: 2rem;
+      }
+
+      .social-link {
+        color: var(--primary-text);
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .social-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--secondary-accent);
+        transition: width 0.3s ease;
+      }
+
+      .social-link:hover::after {
+        width: 100%;
+      }
+
+      .social-link:hover {
+        color: var(--secondary-accent);
+        text-shadow: 0 0 10px var(--secondary-accent);
+      }
+
+      footer {
+        padding: 2.5rem;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+      }
+
+      .footer-links {
+        margin-top: 1rem;
+      }
+
+      .footer-links a,
+      .footer-contact {
+        color: var(--primary-text);
+        text-decoration: none;
+        margin: 0 1.5rem;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover,
+      .footer-contact:hover {
+        color: var(--secondary-accent);
+      }
+
+      .fab {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 70px;
+        height: 70px;
+        background-color: var(--primary-bg);
+        border: 2px solid var(--secondary-accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px var(--secondary-accent);
+      }
+
+      .fab:hover {
+        background-color: var(--secondary-accent);
+        color: var(--primary-bg);
+        transform: rotate(90deg);
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--modal-bg);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        animation: glitchModal 0.5s ease;
+      }
+
+      @keyframes glitchModal {
+        0% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          transform: translate(2px, -2px);
+        }
+        60% {
+          transform: translate(-2px, 2px);
+        }
+        80% {
+          transform: translate(2px, -2px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+
+      .modal-content {
+        background-color: var(--primary-bg);
+        border: 2px solid var(--secondary-accent);
+        padding: 2.5rem;
+        width: 90%;
+        max-width: 550px;
+        position: relative;
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: var(--secondary-accent);
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .modal-close:hover {
+        transform: rotate(90deg);
+      }
+
+      .input-group {
+        margin: 2rem 0;
+      }
+
+      .input-field,
+      .submit-button {
+        width: 100%;
+        padding: 1rem;
+        background-color: transparent;
+        border: 2px solid var(--secondary-accent);
+        color: var(--primary-text);
+        font-family: var(--font-main);
+        margin-top: 0.5rem;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .input-field:focus {
+        outline: none;
+        box-shadow: 0 0 10px var(--secondary-accent);
+      }
+
+      .submit-button {
+        display: block;
+        padding: 1.2rem;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, var(--secondary-accent), transparent);
+        transition: left 0.3s ease;
+      }
+
+      .submit-button:hover::before {
+        left: 100%;
+      }
+
+      .submit-button:hover {
+        background-color: var(--secondary-accent);
+        color: var(--primary-bg);
+        box-shadow: 0 0 20px var(--secondary-accent);
+      }
+
+      .time-display {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        border: 2px solid var(--secondary-accent);
+        text-align: center;
+        font-size: 1.3rem;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(76, 175, 80, 0.05));
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .glitch {
+        position: relative;
+        animation: glitchSkew 4s infinite linear alternate-reverse;
+      }
+
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        clip: rect(0, 0, 0, 0);
+      }
+
+      .glitch::before {
+        left: 3px;
+        text-shadow: -2px 0 var(--secondary-accent);
+        animation: glitch-anim-1 2s infinite linear alternate-reverse;
+      }
+
+      .glitch::after {
+        left: -3px;
+        text-shadow: 2px 0 var(--accent-color);
+        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+      }
+
+      @keyframes glitchSkew {
+        0% {
+          transform: skew(0deg);
+        }
+        5% {
+          transform: skew(2deg);
+        }
+        10% {
+          transform: skew(-2deg);
+        }
+        15% {
+          transform: skew(0deg);
+        }
+        100% {
+          transform: skew(0deg);
+        }
+      }
+
+      @keyframes glitch-anim-1 {
+        0% {
+          clip: rect(36px, 9999px, 9px, 0);
+        }
+        100% {
+          clip: rect(85px, 9999px, 78px, 0);
+        }
+      }
+
+      @keyframes glitch-anim-2 {
+        0% {
+          clip: rect(15px, 9999px, 30px, 0);
+        }
+        100% {
+          clip: rect(54px, 9999px, 120px, 0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        h2 {
+          font-size: 2rem;
+        }
+        .timer-text {
+          font-size: 3.5rem;
+        }
+        .countdown-timer-container {
+          height: 300px;
+        }
+        .feature-visual {
+          height: 30vh;
+        }
+        .feature-icon {
+          font-size: 3rem;
+        }
+        .gallery-item {
+          flex: 0 0 300px;
+          height: 180px;
+        }
+        .fab {
+          width: 60px;
+          height: 60px;
+        }
+        .modal-content {
+          padding: 1.5rem;
+        }
+        .timeline::before {
+          left: 20px;
+        }
+        .timeline-item {
+          width: 100%;
+          left: 0 !important;
+          text-align: left;
+          padding-left: 40px;
+          flex-direction: row !important;
+        }
+        .timeline-item::before {
+          left: 8px;
+          right: auto;
+        }
+        .kanban-board {
+          flex-direction: column;
+        }
+        .kanban-column {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="logo">
+          <img src="/assets/Library_Logo.png" alt="The Cube Logo" class="logo-img" />
+        </div>
+        <h1 class="glitch" data-text="ESCAPE THE CUBE. IF YOU CAN.">ESCAPE THE CUBE. IF YOU CAN.</h1>
+        <p>In a world where time is the only currency, survival demands the ultimate sacrifice.</p>
+        <a href="https://store.steampowered.com/app/3148890/TheCube/" class="cta-button" target="_blank">
+          <img src="/assets/steam_logo.svg" alt="Steam Logo" />
+          <span>Wishlist on Steam</span>
+        </a>
+      </div>
+      <div class="scroll-indicator">▼</div>
+    </section>
+
+    <!-- OVERVIEW SECTION -->
+    <section class="overview" id="overview">
+      <div class="container">
+        <div class="countdown-timer-container">
+          <canvas id="countdown-timer" width="900" height="500"></canvas>
+          <div class="timer-text" id="timer-text">10:00</div>
+        </div>
+        <h2 class="fade-in">THE CUBE DEMANDS YOUR TIME.</h2>
+        <div class="fade-in">
+          <p>The Cube is an experiment in existence, a relentless trial where time is your only asset.</p>
+          <p>Every second is a gamble, every action drains your life, and every death resets your reality.</p>
+          <p>Can you outwit the Cube's illusion of freedom, or will you succumb to its infinite cycle?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="feature" id="feature-1">
+      <div class="container">
+        <div class="feature-visual fade-in">
+          <img src="/assets/hub.png" alt="Dynamic combat footage showing intense FPS action" />
+        </div>
+        <div class="feature-content fade-in">
+          <h2>FIGHT TO SURVIVE</h2>
+          <p>
+            Engage in fast-paced FPS combat where precision and strategy are paramount. Master weapon handling and tactical positioning to outmaneuver relentless enemies. In the Cube, only the skilled
+            prevail, while the reckless face swift punishment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" id="feature-2">
+      <div class="container">
+        <div class="feature-visual fade-in">
+          <img src="/assets/level.webp" alt="Procedural environments with twisted logic" />
+        </div>
+        <div class="feature-content fade-in">
+          <h2>NOWHERE IS SAFE</h2>
+          <p>
+            Navigate procedurally generated dimensions, each a labyrinth of sterile corridors and impossible architecture. Every run presents unique challenges, from deadly traps to shifting
+            realities, ensuring no path is ever the same.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" id="feature-3">
+      <div class="container">
+        <div class="feature-visual fade-in">
+          <img src="/assets/coop.gif" alt="Multiplayer hub with player silhouettes" />
+        </div>
+        <div class="feature-content fade-in">
+          <h2>OTHERS SUFFER WITH YOU</h2>
+          <p>
+            Connect in the multiplayer hub to trade intel, form fragile alliances, or betray for gain. Trust is a rare commodity in the Cube, where every interaction is a calculated risk that could
+            cost you everything.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" id="feature-4">
+      <div class="container">
+        <div class="feature-content fade-in">
+          <i class="fas fa-tools feature-icon"></i>
+          <h2>SACRIFICE FOR STRENGTH</h2>
+          <p>
+            Customize your arsenal with time-infused modifications, trading precious minutes for devastating power. Each upgrade is a gamble: stronger weapons may prolong survival, but at the cost of
+            your dwindling time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" id="feature-5">
+      <div class="container">
+        <div class="feature-content fade-in">
+          <i class="fas fa-tasks feature-icon"></i>
+          <h2>CHOOSE YOUR TORMENT</h2>
+          <p>
+            Accept missions from enigmatic entities, offering time rewards but escalating dangers. Bet on your performance, knowing that overconfidence carries a steep price and failure resets your
+            existence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP SECTION -->
+    <section class="roadmap" id="roadmap">
+      <div class="container">
+        <h2 class="fade-in">DEVELOPMENT ROADMAP</h2>
+        <div class="timeline fade-in">
+          <div class="timeline-item completed">
+            <i class="fas fa-rocket"></i>
+            <div>
+              <h3>Q1 2024</h3>
+              <p>Project kickoff and prototype development</p>
+            </div>
+          </div>
+          <div class="timeline-item completed">
+            <i class="fas fa-play"></i>
+            <div>
+              <h3>Q3 2024</h3>
+              <p>First closed test (core systems)</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <i class="fas fa-users"></i>
+            <div>
+              <h3>Q2 2025</h3>
+              <p>First public test (vertical slice)</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <i class="fas fa-vial"></i>
+            <div>
+              <h3>Q4 2025</h3>
+              <p>Alpha test (expanded features)</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <i class="fas fa-flask"></i>
+            <div>
+              <h3>Q1 2026</h3>
+              <p>Beta test (polished content)</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <i class="fas fa-flag-checkered"></i>
+            <div>
+              <h3>Q2 2026</h3>
+              <p>Full release on Steam</p>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-board fade-in">
+          <div class="kanban-column">
+            <div class="task-counter">129 Tasks</div>
+            <h3>TO DO</h3>
+            <div class="kanban-card">
+              <p>Design Hub Layout (Initial)</p>
+              <div class="tags">Hub, Level Design</div>
+            </div>
+            <div class="kanban-card">
+              <p>Vertical Slice Mission Design</p>
+              <div class="tags">Mission, Level Design</div>
+            </div>
+            <div class="kanban-card">
+              <p>Implement Basic Procedural Generation Algorithm</p>
+              <div class="tags">Procedural Generation, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Account Reset Implementation</p>
+              <div class="tags">Game Loop, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Implement Office World Level Design</p>
+              <div class="tags">World, Level Design</div>
+            </div>
+            <div class="kanban-card">
+              <p>Implement Assault Rifle</p>
+              <div class="tags">Weapon, Combat</div>
+            </div>
+            <div class="kanban-card">
+              <p>Implement 'Retrieve Item' Objective</p>
+              <div class="tags">Mission, Engineering</div>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="task-counter">10 Tasks</div>
+            <h3>IN PROGRESS</h3>
+            <div class="kanban-card">
+              <p>Create Hub Scene</p>
+              <div class="tags">Hub, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Implement Player Movement in Hub</p>
+              <div class="tags">Hub, Player, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Basic Mission Select UI</p>
+              <div class="tags">Mission, UI</div>
+            </div>
+            <div class="kanban-card">
+              <p>Scene Loading between Hub and Mission</p>
+              <div class="tags">Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Basic Mission Success Condition</p>
+              <div class="tags">Mission, Engineering</div>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="task-counter">20 Tasks</div>
+            <h3>DONE</h3>
+            <div class="kanban-card">
+              <p>Integrate Epic Online Services SDK</p>
+              <div class="tags">Multiplayer, EOS, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Implement Pistol Firing Logic</p>
+              <div class="tags">Weapon, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Basic Enemy Health System</p>
+              <div class="tags">Enemy, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Basic Shop Interaction Point</p>
+              <div class="tags">Hub, UI, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Time UI Display</p>
+              <div class="tags">Time Mechanic, UI</div>
+            </div>
+            <div class="kanban-card">
+              <p>Real-time Time Depletion Logic</p>
+              <div class="tags">Time Mechanic, Engineering</div>
+            </div>
+            <div class="kanban-card">
+              <p>Simple Enemy Patrol AI</p>
+              <div class="tags">Enemy, AI, Engineering</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery" id="evidence">
+      <div class="container">
+        <h2 class="fade-in">EVIDENCE</h2>
+        <div class="fade-in">
+          <div class="feature-visual">
+            <!-- youtube embed https://youtu.be/mp2JW9qFbjI -->
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/mp2JW9qFbjI"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="gallery-carousel">
+            <div class="gallery-item" data-fullscreen="/assets/combat2.gif">
+              <img src="/assets/combat2.gif" alt="Combat Scene" />
+              <div class="overlay"><span>Combat Scene</span></div>
+            </div>
+            <div class="gallery-item" data-fullscreen="/assets/Stealth Showcase.gif">
+              <img src="/assets/Stealth Showcase.gif" alt="Stealth Showcase" />
+              <div class="overlay"><span>Stealth Showcase</span></div>
+            </div>
+            <div class="gallery-item" data-fullscreen="/assets/Image Sequence_004_0001.jpg">
+              <img src="/assets/Image Sequence_004_0001.jpg" alt="Office #1" />
+              <div class="overlay"><span>Office #1</span></div>
+            </div>
+            <div class="gallery-item" data-fullscreen="/assets/hub-proto.png">
+              <img src="/assets/hub-proto.png" alt="Hub Prototype #1" />
+              <div class="overlay"><span>Hub Prototype #1</span></div>
+            </div>
+            <div class="gallery-item" data-fullscreen="/assets/hub-proto2.png">
+              <img src="/assets/hub-proto2.png" alt="Hub Prototype #2" />
+              <div class="overlay"><span>Hub Prototype #2</span></div>
+            </div>
+            <div class="gallery-item" data-fullscreen="/assets/TC_imDying.png">
+              <img src="/assets/TC_imDying.png" alt="Character Pose" />
+              <div class="overlay"><span>Character Pose</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT SECTION -->
+    <section class="connect" id="connect">
+      <div class="container">
+        <h2 class="fade-in">CONNECT</h2>
+        <div class="fade-in">
+          <div class="social-links">
+            <a href="#" class="social-link">DISCORD</a>
+            <a href="#" class="social-link">TWITTER</a>
+            <a href="#" class="social-link">REDDIT</a>
+            <a href="#" class="social-link">STEAM</a>
+          </div>
+          <div style="margin-top: 2rem">
+            <form>
+              <h3>SUBSCRIBE TO THE EXPERIMENT</h3>
+              <div class="input-group">
+                <input type="email" placeholder="YOUR EMAIL" class="input-field" />
+              </div>
+              <button type="submit" class="submit-button">SUBSCRIBE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <p>© 2025 THE CUBE DEVELOPMENT COLLECTIVE. ALL RIGHTS RESERVED.</p>
+        <div class="footer-links">
+          <a href="#">PRIVACY POLICY</a>
+          <a href="#">TERMS OF SERVICE</a>
+          <a href="mailto:contact@thecubegame.com" class="footer-contact">PRESS: CONTACT@THECUBEGAME.COM</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- FLOATING ACTION BUTTON -->
+    <div class="fab" id="time-fab">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+    </div>
+
+    <!-- TIME MODAL -->
+    <div class="modal" id="time-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">×</button>
+        <h2>YOUR CURRENT CYCLE</h2>
+        <p>Enter your identifier to query your remaining time.</p>
+        <div class="input-group">
+          <input type="text" placeholder="IDENTIFIER (In-Game Username/Steam ID)" class="input-field" id="identifier-input" />
+        </div>
+        <button class="submit-button" id="query-button">QUERY THE CUBE</button>
+        <div class="time-display" id="time-display">Awaiting query...</div>
+        <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center">*Remember: Time lost cannot be recovered.</p>
+      </div>
+    </div>
+
+    <!-- FULLSCREEN IMAGE MODAL -->
+    <div class="fullscreen-modal" id="fullscreen-modal">
+      <button class="fullscreen-close" id="fullscreen-close">×</button>
+      <img id="fullscreen-image" src="" alt="Fullscreen Image" />
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fade-in animation
+        const fadeElements = document.querySelectorAll(".fade-in");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        fadeElements.forEach((element) => observer.observe(element));
+
+        // Modal functionality
+        const fab = document.getElementById("time-fab");
+        const modal = document.getElementById("time-modal");
+        const closeBtn = document.getElementById("modal-close");
+        const queryBtn = document.getElementById("query-button");
+        const timeDisplay = document.getElementById("time-display");
+        const identifierInput = document.getElementById("identifier-input");
+
+        fab.addEventListener("click", () => {
+          modal.style.display = "flex";
+          modal.classList.add("glitch");
+          setTimeout(() => modal.classList.remove("glitch"), 500);
+        });
+
+        closeBtn.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (event) => {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+
+        queryBtn.addEventListener("click", () => {
+          const identifier = identifierInput.value.trim();
+          if (identifier === "") {
+            timeDisplay.innerHTML = "ERROR: IDENTIFIER REQUIRED";
+          } else {
+            timeDisplay.innerHTML = "QUERYING...";
+            setTimeout(() => {
+              const time = Math.floor(Math.random() * 110) + 10;
+              timeDisplay.innerHTML = `TIME REMAINING: ${time} MINUTES`;
+            }, 1500);
+          }
+        });
+
+        // Fullscreen gallery functionality
+        const galleryItems = document.querySelectorAll(".gallery-item[data-fullscreen]");
+        const fullscreenModal = document.getElementById("fullscreen-modal");
+        const fullscreenImage = document.getElementById("fullscreen-image");
+        const fullscreenClose = document.getElementById("fullscreen-close");
+
+        galleryItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            const src = item.dataset.fullscreen;
+            fullscreenImage.src = src;
+            fullscreenModal.style.display = "flex";
+          });
+        });
+
+        fullscreenClose.addEventListener("click", () => {
+          fullscreenModal.style.display = "none";
+        });
+
+        window.addEventListener("click", (event) => {
+          if (event.target === fullscreenModal) {
+            fullscreenModal.style.display = "none";
+          }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelector(".scroll-indicator").addEventListener("click", () => {
+          document.querySelector("#overview").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      // Countdown Timer Animation
+      const canvas = document.getElementById("countdown-timer");
+      const ctx = canvas.getContext("2d", { alpha: true });
+      const timerText = document.getElementById("timer-text");
+      let startTime = 600;
+      let currentTime = startTime;
+      let lastUpdate = performance.now();
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+      }
+
+      function drawTimerCircle(ctx, canvas, percentage) {
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = Math.min(centerX, centerY) * 0.8;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(0, 255, 255, 0.2)";
+        ctx.lineWidth = 20;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + percentage * Math.PI * 2);
+        ctx.strokeStyle = "rgba(0, 255, 255, 0.9)";
+        ctx.lineWidth = 20;
+        ctx.stroke();
+
+        if (Math.random() < 0.03) {
+          const glitchX = Math.random() * canvas.width;
+          const glitchY = Math.random() * canvas.height;
+          const glitchW = Math.random() * 80 + 40;
+          const glitchH = Math.random() * 15 + 5;
+          ctx.fillStyle = "rgba(0, 255, 255, 0.15)";
+          ctx.fillRect(glitchX, glitchY, glitchW, glitchH);
+        }
+
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          const size = Math.random() + 1;
+          ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.05})`;
+          ctx.fillRect(x, y, size, size);
+        }
+      }
+
+      function updateTimer(timestamp) {
+        const delta = (timestamp - lastUpdate) / 1000;
+        lastUpdate = timestamp;
+
+        currentTime -= delta;
+        if (currentTime <= 0) {
+          currentTime = startTime;
+        }
+
+        const percentage = currentTime / startTime;
+        timerText.innerText = formatTime(Math.ceil(currentTime));
+        drawTimerCircle(ctx, canvas, percentage);
+
+        if (Math.random() < 0.008) {
+          timerText.style.letterSpacing = `${Math.random() * 0.4}em`;
+          timerText.style.transform = `skew(${Math.random() * 2 - 1}deg)`;
+          setTimeout(() => {
+            timerText.style.letterSpacing = "0.15em";
+            timerText.style.transform = "skew(0deg)";
+          }, 150);
+        }
+
+        requestAnimationFrame(updateTimer);
+      }
+
+      const timerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              lastUpdate = performance.now();
+              requestAnimationFrame(updateTimer);
+              timerObserver.disconnect();
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      timerObserver.observe(document.querySelector(".countdown-timer-container"));
+    </script>
+  </body>
+</html>

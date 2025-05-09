@@ -1102,8 +1102,10 @@
 
     <section class="feature" id="feature-4">
       <div class="container">
+        <div class="feature-visual fade-in">
+          <img src="https://limeless-studio.github.io/thecube-kit/assets/Final_Shop.png" alt="Multiplayer hub with player silhouettes" />
+        </div>
         <div class="feature-content fade-in">
-          <i class="fas fa-tools feature-icon"></i>
           <h2>SACRIFICE FOR STRENGTH</h2>
           <p>
             Customize your arsenal with time-infused modifications, trading precious minutes for devastating power. Each upgrade is a gamble: stronger weapons may prolong survival, but at the cost of
@@ -1115,8 +1117,10 @@
 
     <section class="feature" id="feature-5">
       <div class="container">
+        <div class="feature-visual fade-in">
+          <img src="https://limeless-studio.github.io/thecube-kit/assets/goal.png" alt="Stealth gameplay with shadows and light" />
+        </div>
         <div class="feature-content fade-in">
-          <i class="fas fa-tasks feature-icon"></i>
           <h2>CHOOSE YOUR TORMENT</h2>
           <p>
             Accept missions from enigmatic entities, offering time rewards but escalating dangers. Bet on your performance, knowing that overconfidence carries a steep price and failure resets your
@@ -1141,43 +1145,43 @@
               allowfullscreen
             ></iframe>
           </div>
-          
+
           <!-- New carousel implementation -->
           <div class="gallery-carousel-container">
             <div class="gallery-carousel">
               <div class="gallery-slides" id="gallery-slides">
-                <div class="gallery-item" data-fullscreen="/assets/combat2.gif">
+                <div class="gallery-item" data-fullscreen="https://limeless-studio.github.io/assets/combat2.gif">
                   <img src="https://limeless-studio.github.io/thecube-kit/assets/combat2.gif" alt="Combat Scene" />
                   <div class="overlay"><span>Combat Scene</span></div>
                 </div>
-                <div class="gallery-item" data-fullscreen="/assets/Stealth Showcase.gif">
+                <div class="gallery-item" data-fullscreen="https://limeless-studio.github.io/assets/Stealth Showcase.gif">
                   <img src="https://limeless-studio.github.io/thecube-kit/assets/Stealth Showcase.gif" alt="Stealth Showcase" />
                   <div class="overlay"><span>Stealth Showcase</span></div>
                 </div>
-                <div class="gallery-item" data-fullscreen="/assets/Image Sequence_004_0001.jpg">
+                <div class="gallery-item" data-fullscreen="https://limeless-studio.github.io/assets/Image Sequence_004_0001.jpg">
                   <img src="https://limeless-studio.github.io/thecube-kit/assets/Image Sequence_004_0001.jpg" alt="Office #1" />
                   <div class="overlay"><span>Office #1</span></div>
                 </div>
-                <div class="gallery-item" data-fullscreen="/assets/hub-proto.png">
+                <div class="gallery-item" data-fullscreen="https://limeless-studio.github.io/assets/hub-proto.png">
                   <img src="https://limeless-studio.github.io/thecube-kit/assets/hub-proto.png" alt="Hub Prototype #1" />
                   <div class="overlay"><span>Hub Prototype #1</span></div>
                 </div>
-                <div class="gallery-item" data-fullscreen="/assets/hub-proto2.png">
+                <div class="gallery-item" data-fullscreen="https://limeless-studio.github.io/assets/hub-proto2.png">
                   <img src="https://limeless-studio.github.io/thecube-kit/assets/hub-proto2.png" alt="Hub Prototype #2" />
                   <div class="overlay"><span>Hub Prototype #2</span></div>
                 </div>
-                <div class="gallery-item" data-fullscreen="/assets/TC_imDying.png">
+                <div class="gallery-item" data-fullscreen="https://limeless-studio.github.io/assets/TC_imDying.png">
                   <img src="https://limeless-studio.github.io/thecube-kit/assets/TC_imDying.png" alt="Character Pose" />
                   <div class="overlay"><span>Character Pose</span></div>
                 </div>
               </div>
             </div>
-            
+
             <div class="carousel-nav">
               <button class="carousel-button" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
               <button class="carousel-button" id="next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
-            
+
             <div class="carousel-dots" id="carousel-dots">
               <!-- Dots will be added dynamically with JavaScript -->
             </div>
@@ -1354,11 +1358,12 @@
     <!-- FOOTER -->
     <footer>
       <div class="container">
-        <p>© 2025 THE CUBE DEVELOPMENT COLLECTIVE. ALL RIGHTS RESERVED.</p>
+        <p>© 2025 Limeless Studio. All rights reserved.</p>
+        <p>THE CUBE is a work of fiction. Any resemblance to actual persons, living or dead, or actual events is purely coincidental.</p>
         <div class="footer-links">
           <a href="#">PRIVACY POLICY</a>
           <a href="#">TERMS OF SERVICE</a>
-          <a href="mailto:contact@thecubegame.com" class="footer-contact">PRESS: CONTACT@THECUBEGAME.COM</a>
+          <a href="mailto:thecube.limeless@gmail.com" class="footer-contact">PRESS: THECUBE.LIMELESS@GMAIL.COM</a>
         </div>
       </div>
     </footer>
@@ -1446,82 +1451,82 @@
         });
 
         // Carousel functionality
-        const slidesContainer = document.getElementById('gallery-slides');
-        const prevButton = document.getElementById('prev-btn');
-        const nextButton = document.getElementById('next-btn');
-        const dotsContainer = document.getElementById('carousel-dots');
-        
-        const slides = document.querySelectorAll('.gallery-item');
+        const slidesContainer = document.getElementById("gallery-slides");
+        const prevButton = document.getElementById("prev-btn");
+        const nextButton = document.getElementById("next-btn");
+        const dotsContainer = document.getElementById("carousel-dots");
+
+        const slides = document.querySelectorAll(".gallery-item");
         const slideCount = slides.length;
         let currentIndex = 0;
-        
+
         // Create dots for each slide
         for (let i = 0; i < slideCount; i++) {
-          const dot = document.createElement('button');
-          dot.classList.add('carousel-dot');
-          if (i === 0) dot.classList.add('active');
-          dot.setAttribute('data-index', i);
+          const dot = document.createElement("button");
+          dot.classList.add("carousel-dot");
+          if (i === 0) dot.classList.add("active");
+          dot.setAttribute("data-index", i);
           dotsContainer.appendChild(dot);
-          
-          dot.addEventListener('click', () => {
+
+          dot.addEventListener("click", () => {
             goToSlide(i);
           });
         }
-        
+
         // Functions to control the carousel
         function updateSlidePosition() {
           // This will move the slides container to show the current slide
           slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-          
+
           // Update active dot
-          document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+          document.querySelectorAll(".carousel-dot").forEach((dot, index) => {
             if (index === currentIndex) {
-              dot.classList.add('active');
+              dot.classList.add("active");
             } else {
-              dot.classList.remove('active');
+              dot.classList.remove("active");
             }
           });
         }
-        
+
         function goToSlide(index) {
           currentIndex = index;
           if (currentIndex < 0) currentIndex = slideCount - 1;
           if (currentIndex >= slideCount) currentIndex = 0;
           updateSlidePosition();
         }
-        
+
         // Event listeners for buttons
-        prevButton.addEventListener('click', () => {
+        prevButton.addEventListener("click", () => {
           goToSlide(currentIndex - 1);
         });
-        
-        nextButton.addEventListener('click', () => {
+
+        nextButton.addEventListener("click", () => {
           goToSlide(currentIndex + 1);
         });
-        
+
         // Set initial position
         updateSlidePosition();
-        
+
         // Add keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') {
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
             goToSlide(currentIndex - 1);
-          } else if (e.key === 'ArrowRight') {
+          } else if (e.key === "ArrowRight") {
             goToSlide(currentIndex + 1);
           }
         });
-        
+
         // Set up automatic advancement
         let autoplayInterval = setInterval(() => {
           goToSlide(currentIndex + 1);
         }, 5000);
-        
+
         // Pause autoplay on hover
-        slidesContainer.addEventListener('mouseenter', () => {
+        slidesContainer.addEventListener("mouseenter", () => {
           clearInterval(autoplayInterval);
         });
-        
-        slidesContainer.addEventListener('mouseleave', () => {
+
+        slidesContainer.addEventListener("mouseleave", () => {
           autoplayInterval = setInterval(() => {
             goToSlide(currentIndex + 1);
           }, 5000);
@@ -1538,7 +1543,7 @@
             const src = item.dataset.fullscreen;
             fullscreenImage.src = src;
             fullscreenModal.style.display = "flex";
-            
+
             // Pause carousel autoplay when viewing fullscreen
             clearInterval(autoplayInterval);
           });
@@ -1546,7 +1551,7 @@
 
         fullscreenClose.addEventListener("click", () => {
           fullscreenModal.style.display = "none";
-          
+
           // Resume carousel autoplay when closing fullscreen
           autoplayInterval = setInterval(() => {
             goToSlide(currentIndex + 1);
@@ -1556,7 +1561,7 @@
         window.addEventListener("click", (event) => {
           if (event.target === fullscreenModal) {
             fullscreenModal.style.display = "none";
-            
+
             // Resume carousel autoplay when closing fullscreen
             autoplayInterval = setInterval(() => {
               goToSlide(currentIndex + 1);
@@ -1565,11 +1570,11 @@
         });
 
         // Add keyboard navigation for fullscreen modal
-        document.addEventListener('keydown', (e) => {
-          if (fullscreenModal.style.display === 'flex') {
-            if (e.key === 'Escape') {
+        document.addEventListener("keydown", (e) => {
+          if (fullscreenModal.style.display === "flex") {
+            if (e.key === "Escape") {
               fullscreenModal.style.display = "none";
-              
+
               // Resume carousel autoplay when closing fullscreen
               autoplayInterval = setInterval(() => {
                 goToSlide(currentIndex + 1);

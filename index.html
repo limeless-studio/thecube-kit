@@ -12,18 +12,18 @@
         --secondary-bg: #2d2d2d;
         --primary-text: #e8e8e8;
         --secondary-text: #c0c0c0;
-        --accent-yellow: #f5c842;
-        --accent-yellow-dark: #e6b535;
-        --accent-yellow-light: #f7d66a;
+        --accent-yellow: #f5f1db;
+        --accent-yellow-dark: #ede8d2;
+        --accent-yellow-light: #fdfbf5;
         --glass-bg: rgba(42, 42, 42, 0.85);
-        --glass-border: rgba(245, 200, 66, 0.3);
+        --glass-border: rgba(245, 241, 219, 0.3);
         --glass-shadow: rgba(0, 0, 0, 0.4);
-        --border-color: rgba(245, 200, 66, 0.25);
+        --border-color: rgba(245, 241, 219, 0.25);
         --modal-bg: rgba(26, 26, 26, 0.95);
         --font-main: "Orbitron", sans-serif;
         --font-heading: "Arial Black", Helvetica, sans-serif;
-        --glow-yellow: 0 0 15px rgba(245, 200, 66, 0.4);
-        --particles-color: rgba(245, 200, 66, 0.7);
+        --glow-yellow: 0 0 15px rgba(245, 241, 219, 0.4);
+        --particles-color: rgba(245, 241, 219, 0.7);
       }
 
       * {
@@ -152,15 +152,15 @@
       }
 
       h1 {
-        font-size: 4rem;
-        margin-bottom: 1.5rem;
+        font-size: 3rem;
+        margin-bottom: 1rem;
         text-shadow: var(--glow-yellow);
         animation: pulse-glow 3s ease-in-out infinite;
       }
 
       h2 {
-        font-size: 2.8rem;
-        margin-bottom: 1.2rem;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
       }
 
       /* Glass card effect for sections */
@@ -289,12 +289,45 @@
         display: flex;
         gap: 2rem;
         margin-top: 2rem;
+        align-items: center;
+      }
+
+      .qr-code-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 2rem;
+      }
+
+      .qr-code {
+        width: 120px;
+        height: 120px;
+        background: white;
+        padding: 8px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px var(--glass-shadow);
+        border: 2px solid var(--accent-yellow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .qr-code:hover {
+        transform: scale(1.05);
+        box-shadow: var(--glow-yellow), 0 6px 20px var(--glass-shadow);
+      }
+
+      .qr-label {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--secondary-text);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
       }
 
       .overview {
         background: 
-          radial-gradient(circle at 70% 30%, rgba(245, 200, 66, 0.1), transparent 60%),
-          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><rect x="10" y="10" width="80" height="80" stroke="%23f5c842" stroke-width="2" fill="none"/></svg>');
+          radial-gradient(circle at 70% 30%, rgba(245, 241, 219, 0.1), transparent 60%),
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><rect x="10" y="10" width="80" height="80" stroke="%23f5f1db" stroke-width="2" fill="none"/></svg>');
         background-size: 100%, 120px;
         position: relative;
         transition: background 0.8s ease-in-out;
@@ -309,8 +342,8 @@
         height: 100%;
         background: linear-gradient(45deg, 
           transparent 0%, 
-          rgba(245, 200, 66, 0.03) 30%,
-          rgba(245, 200, 66, 0.05) 70%,
+          rgba(245, 241, 219, 0.03) 30%,
+          rgba(245, 241, 219, 0.05) 70%,
           transparent 100%);
         animation: sectionShift 12s ease-in-out infinite alternate;
         pointer-events: none;
@@ -318,10 +351,10 @@
 
       .feature {
         background: 
-          radial-gradient(circle at 20% 80%, rgba(245, 200, 66, 0.08), transparent 50%),
-          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23f5c842" stroke-width="1.5"/></svg>');
+          radial-gradient(circle at 20% 80%, rgba(245, 241, 219, 0.08), transparent 50%),
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23f5f1db" stroke-width="1.5"/></svg>');
         background-size: 100%, 80px;
-        padding: 4rem 2rem;
+        padding: 3rem 2rem;
         border-bottom: 1px solid var(--border-color);
         position: relative;
         transition: all 0.8s ease;
@@ -361,14 +394,14 @@
 
       .feature-content h2 {
         text-align: left;
-        margin-bottom: 1.5rem;
-        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+        font-size: 2rem;
       }
 
       .feature-content p {
         text-align: left;
-        font-size: 1.2rem;
-        line-height: 1.8;
+        font-size: 1.1rem;
+        line-height: 1.7;
         margin: 0;
       }
 
@@ -379,8 +412,8 @@
 
       .feature:nth-child(even) {
         background: 
-          radial-gradient(circle at 80% 20%, rgba(245, 200, 66, 0.06), transparent 50%),
-          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><circle cx="50" cy="50" r="25" stroke="%23f5c842" stroke-width="1.5" fill="none"/></svg>');
+          radial-gradient(circle at 80% 20%, rgba(245, 241, 219, 0.06), transparent 50%),
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><circle cx="50" cy="50" r="25" stroke="%23f5f1db" stroke-width="1.5" fill="none"/></svg>');
         background-size: 100%, 90px;
       }
 
@@ -517,8 +550,8 @@
 
       .logo {
         width: 100%;
-        max-width: 450px;
-        margin-bottom: 3rem;
+        max-width: 350px;
+        margin-bottom: 2rem;
         position: relative;
         filter: drop-shadow(var(--glow-yellow));
       }
@@ -538,23 +571,23 @@
       .cta-button {
         display: inline-flex;
         align-items: center;
-        padding: 1.5rem 3rem;
-        background: linear-gradient(135deg, var(--glass-bg), rgba(245, 200, 66, 0.08));
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--glass-bg), rgba(245, 241, 219, 0.08));
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
         color: var(--primary-text);
         border: 2px solid var(--accent-yellow);
-        border-radius: 20px;
+        border-radius: 15px;
         text-decoration: none;
         font-weight: bold;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         text-transform: uppercase;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 10px 40px var(--glass-shadow);
-        font-size: 1.1rem;
+        box-shadow: 0 8px 30px var(--glass-shadow);
+        font-size: 0.9rem;
       }
 
       .cta-button::before {
@@ -564,7 +597,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(245, 200, 66, 0.4), transparent);
+        background: linear-gradient(90deg, transparent, rgba(245, 241, 219, 0.4), transparent);
         transition: left 0.6s ease;
       }
 
@@ -582,9 +615,9 @@
 
       .cta-button img {
         vertical-align: middle;
-        margin-right: 1rem;
-        width: 28px;
-        height: 28px;
+        margin-right: 0.8rem;
+        width: 20px;
+        height: 20px;
         transition: transform 0.3s ease;
       }
 
@@ -1660,29 +1693,42 @@
       /* Responsive styles */
       @media (max-width: 768px) {
         h1 {
-          font-size: 2.5rem;
-        }
-        h2 {
           font-size: 2rem;
         }
+        h2 {
+          font-size: 1.6rem;
+        }
 
         p {
-          font-size: 1rem;
+          font-size: 0.9rem;
         }
 
         .hero-buttons {
           flex-direction: column;
           gap: 1rem;
+          align-items: center;
         }
 
-
-        p {
-          font-size: 1rem;
+        .qr-code-container {
+          margin-left: 0;
+          margin-top: 1rem;
         }
 
-        .hero-buttons {
-          flex-direction: column;
-          gap: 1rem;
+        .qr-code {
+          width: 100px;
+          height: 100px;
+        }
+
+        .cta-button {
+          padding: 0.8rem 1.5rem;
+          font-size: 0.8rem;
+          letter-spacing: 1px;
+        }
+
+        .cta-button img {
+          width: 16px;
+          height: 16px;
+          margin-right: 0.6rem;
         }
 
         .timer-text {
@@ -1757,6 +1803,13 @@
             <img src="https://limeless-studio.github.io/thecube-kit/assets/feedback.svg" alt="Feedback Icon" />
             <span>Submit your feedback</span>
           </a>
+          <div class="qr-code-container">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://store.steampowered.com/app/3148890/TheCube/" 
+                 alt="QR Code for Steam Page" 
+                 class="qr-code" 
+                 title="Scan to visit Steam page on mobile" />
+            <div class="qr-label">Scan for Steam</div>
+          </div>
         </div>
         
       </div>
